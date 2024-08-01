@@ -9,7 +9,23 @@
 
 # Import the required libraries
 import torch
-from utils.criterion import CrossEntropyLoss2d
+import torch.nn as nn
+import torch.nn.functional as F
+
+# Cross entropy loss over the actual segmentation map and predicted segmentation map
+class CrossEntropyLoss2d(nn.Module):
+
+    def __init__(self, weight = None):
+        super().__init__()
+
+        self.loss = nn.NLLLoss2d(weight)
+
+    def forward(self, outputs, targets):
+        return self.loss(F.log_softmax(outputs), targets)
+
+# Import the required libraries
+# import torch
+# from utils.criterion import CrossEntropyLoss2d
 
 # Function to take channels, used for calculating IoU score
 def _take_channels(*xs, ignore_channels = None):
