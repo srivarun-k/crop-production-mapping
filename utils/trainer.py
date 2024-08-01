@@ -9,7 +9,7 @@
 
 # Import the required libraries
 import torch
-from utils.criterion import CrossEntropyLoss2d
+from criterion import CrossEntropyLoss2d
 
 # Function to take channels, used for calculating IoU score
 def _take_channels(*xs, ignore_channels = None):
